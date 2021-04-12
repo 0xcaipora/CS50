@@ -1,0 +1,109 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <iostream>
+#include <sstream>
+#include <string>
+using namespace std;
+
+string LaySoGachDuoi(string so) {
+    // "40600001"
+    int do_dai = so.length(); // 16
+    int i = do_dai - 2;
+    string ket_qua = "";
+    while (i >= 0) {
+        ket_qua = so[i] + ket_qua; // "1" + "1" => "11"
+        i = i - 2;
+    }
+    return ket_qua;
+}
+// Ham buoc 2a 
+string ChuoiTongSoGachDuoi(string so) {
+    // "40600001"
+    string tong_chuoi = ""; 
+    int i = so.length() - 1; 
+    while(i >= 0){
+        int j = (so[i]- '0')*2; 
+        std::ostringstream ostr;
+        ostr << j;
+        std::string s = ostr.str();
+        tong_chuoi += s;
+        i--; 
+    }
+    return tong_chuoi;
+}
+// Ham buoc 2b 
+int TinhTongSoGachDuoiNhan2(string so) {
+    int tong = 0; 
+    int i = so.length() - 1; 
+    while(i >= 0){
+        tong += (so[i]- '0');
+        i--; 
+    }
+    return tong; 
+}
+
+// Ham buoc 3
+string LaySoKhongGachDuoi(string so) {
+    int do_dai = so.length(); // 16
+    int i = do_dai - 1;
+    string ket_qua = "";
+    while (i >= 0) {
+        ket_qua = so[i] + ket_qua; // "1" + "1" => "11"
+        i = i - 2;
+    }
+    return ket_qua;
+}
+
+// Ham buoc 3b
+//yeah ban trai keu xoa thi ban gai xoa thoi
+// Ham buoc 4
+int TinhTong(int a, int b) {
+    return a + b; 
+}
+
+// Ham buoc 5
+bool CoPhaiCreditCardHayKhong(int tong) {
+    if (tong % 10 != 0)
+        return false;
+    return true;
+}
+
+int main()
+{
+    string card = "4221093000313270";
+    //             _ _ _ _ _ _ _ _ 
+    
+    // Buoc 1: tu card => so o vi tri chan (so duoc gach duoi trong de bai)
+    string so_gach_duoi = LaySoGachDuoi(card);
+    cout << so_gach_duoi << "\n";
+   
+    // Buoc 2: tinh tong cac so vi tri duoc gach duoi va nhan 2
+    string chuoi_tong_so_gach_duoi = ChuoiTongSoGachDuoi(so_gach_duoi); 
+    cout << chuoi_tong_so_gach_duoi << "\n";
+    
+    int tong_so_gach_duoi = TinhTongSoGachDuoiNhan2(chuoi_tong_so_gach_duoi);
+    cout << tong_so_gach_duoi << "\n";
+    // Buoc 3: tu card => so o vi tri khong duoc gach duoi
+    string so_0_gach_duoi = LaySoKhongGachDuoi(card);
+    cout << so_0_gach_duoi << "\n";
+    // Buoc 3b: tinh tong cac so vi tri khong duoc gach duoi
+    int tong_so_0_gach_duoi = TinhTongSoGachDuoiNhan2(so_0_gach_duoi);
+    cout << tong_so_0_gach_duoi << "\n";
+    // Buoc 4: tinh tong buoc (2) va buoc (3b)
+    int tong = TinhTong(tong_so_gach_duoi, tong_so_0_gach_duoi);
+    cout << tong << "\n";
+    
+    // Buoc 5: kiem tra tong buoc (4) co phai credit card number hay khong
+    if (CoPhaiCreditCardHayKhong(tong)) 
+        printf("valid credit card"); 
+    else 
+        printf("unvalid"); 
+    // Buoc 6: can ban gai 1 cai
+}
+
